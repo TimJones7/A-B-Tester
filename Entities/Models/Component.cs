@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,10 @@ namespace Entities.Models
         public int Id { get; set; }
 
         public string? Name { get; set; }
-        
+
+        [Required]
+        [ForeignKey("Root")]
+        public int ElementId { get; set; }
         [Required]
         public Element Root { get; set; }
     }
