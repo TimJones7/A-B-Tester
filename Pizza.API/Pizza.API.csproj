@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Repository\Commands\" />
     <Folder Include="Repository\Queries\" />
+    <Folder Include="Schema\Mutations\" />
   </ItemGroup>
 
   <ItemGroup>

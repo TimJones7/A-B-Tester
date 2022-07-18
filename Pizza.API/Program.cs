@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Pizza.API.Data;
+using Pizza.API.Schema.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddGraphQLServer()
+    .AddQueryType<Query>();
 
 
 
@@ -16,11 +18,14 @@ builder.Services.AddPooledDbContextFactory<PizzaDbContext>(options =>
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.UseRouting();
 
+app.UseWebSockets();
 
-
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGraphQL();
+});
 
 
 using (IServiceScope scope = app.Services.CreateScope())
@@ -34,3 +39,5 @@ using (IServiceScope scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+
