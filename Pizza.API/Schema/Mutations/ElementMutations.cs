@@ -22,12 +22,16 @@ namespace Pizza.API.Schema.Mutations
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(url);
             List<Element> elements = ParseHtml.ParseHTMLDocument(htmlDoc, seenNodes1);
-
             return _elementCommands.UploadElements(elements);
         }
 
-        
-
-
+        public bool ElementsByString(string htmlString)
+        {
+            Dictionary<HtmlNode, Element> seenNodes1 = new Dictionary<HtmlNode, Element>();
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(htmlString);
+            List<Element> elements = ParseHtml.ParseHTMLDocument(htmlDoc, seenNodes1);
+            return _elementCommands.UploadElements(elements);
+        }
     }
 }
