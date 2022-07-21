@@ -63,16 +63,7 @@ namespace Pizza.API.Data
             //  Element
             builder.Entity<Element>()
                 .HasKey(element => element.Id);
-            
-            builder.Entity<Element>()
-                .HasOne(element => element.ParentElement);
-
-            builder.Entity<Element>()
-                .HasOne(element => element.FirstChild);
-
-            builder.Entity<Element>()
-                .HasOne(element => element.NextChild);
-
+           
             builder.Entity<Element>()
                 .HasMany(element => element.Sessions)
                 .WithMany(session => session.Elements);

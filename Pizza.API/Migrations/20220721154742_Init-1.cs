@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pizza.API.Migrations
 {
-    public partial class init1 : Migration
+    public partial class Init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,36 +29,21 @@ namespace Pizza.API.Migrations
                 name: "Elements",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DomElement = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    IsRoot = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DomElement = table.Column<string>(type: "TEXT", nullable: true),
                     HtmlId = table.Column<string>(type: "TEXT", nullable: true),
-                    Classes = table.Column<string>(type: "TEXT", nullable: true),
-                    Styles = table.Column<string>(type: "TEXT", nullable: true),
-                    Title = table.Column<string>(type: "TEXT", nullable: true),
-                    Value = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentId = table.Column<int>(type: "INTEGER", nullable: true),
-                    FirstChildId = table.Column<int>(type: "INTEGER", nullable: true),
-                    NextChildId = table.Column<int>(type: "INTEGER", nullable: true)
+                    HtmlClasses = table.Column<string>(type: "TEXT", nullable: true),
+                    HtmlStyles = table.Column<string>(type: "TEXT", nullable: true),
+                    HtmlName = table.Column<string>(type: "TEXT", nullable: true),
+                    HtmlValue = table.Column<string>(type: "TEXT", nullable: true),
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    FirstChildId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    NextChildId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Elements", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Elements_Elements_FirstChildId",
-                        column: x => x.FirstChildId,
-                        principalTable: "Elements",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Elements_Elements_NextChildId",
-                        column: x => x.NextChildId,
-                        principalTable: "Elements",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Elements_Elements_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Elements",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -90,7 +75,7 @@ namespace Pizza.API.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    ElementId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ElementId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +92,7 @@ namespace Pizza.API.Migrations
                 name: "ElementSession",
                 columns: table => new
                 {
-                    ElementsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ElementsId = table.Column<Guid>(type: "TEXT", nullable: false),
                     SessionsId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -133,7 +118,7 @@ namespace Pizza.API.Migrations
                 {
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
                     SessionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ElementId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ElementId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Action = table.Column<int>(type: "INTEGER", nullable: false),
                     OccuranceDateTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -164,21 +149,6 @@ namespace Pizza.API.Migrations
                 name: "IX_Components_ElementId",
                 table: "Components",
                 column: "ElementId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Elements_FirstChildId",
-                table: "Elements",
-                column: "FirstChildId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Elements_NextChildId",
-                table: "Elements",
-                column: "NextChildId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Elements_ParentId",
-                table: "Elements",
-                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ElementSession_SessionsId",

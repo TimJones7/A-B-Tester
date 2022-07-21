@@ -11,32 +11,28 @@ namespace Entities.Models
     public class Element
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        [Required]
-        public string DomElement { get; set; }
+        public bool IsRoot { get; set; }
 
+        public string? DomElement { get; set; }
+
+        
         public string? HtmlId { get; set; }
 
-        public string? Classes { get; set; }
+        public string? HtmlClasses { get; set; }
 
-        public string? Styles { get; set; }
+        public string? HtmlStyles { get; set; }
 
-        public string? Title { get; set; }
+        public string? HtmlName { get; set; }
 
-        public string? Value { get; set; }
+        public string? HtmlValue { get; set; }
 
-        [ForeignKey("ParentElement")]
-        public int? ParentId { get; set; }
-        public Element? ParentElement { get; set; }
-
-        [ForeignKey("FirstChild")]
-        public int? FirstChildId { get; set; }
-        public Element? FirstChild { get; set; }
-
-        [ForeignKey("NextChild")]
-        public int? NextChildId { get; set; }
-        public Element? NextChild { get; set; }
+        
+        
+        public Guid? ParentId { get; set; }
+        public Guid? FirstChildId { get; set; }        
+        public Guid? NextChildId { get; set; }
 
 
         //  An element might appear in multiple sessions

@@ -11,8 +11,8 @@ using Pizza.API.Data;
 namespace Pizza.API.Migrations
 {
     [DbContext(typeof(PizzaDbContext))]
-    [Migration("20220717212837_init1")]
-    partial class init1
+    [Migration("20220721154742_Init-1")]
+    partial class Init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,8 +21,8 @@ namespace Pizza.API.Migrations
 
             modelBuilder.Entity("ElementSession", b =>
                 {
-                    b.Property<int>("ElementsId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ElementsId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("SessionsId")
                         .HasColumnType("INTEGER");
@@ -40,8 +40,8 @@ namespace Pizza.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ElementId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ElementId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -91,8 +91,8 @@ namespace Pizza.API.Migrations
                     b.Property<int>("SessionId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ElementId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ElementId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Action")
                         .HasColumnType("INTEGER");
@@ -111,45 +111,41 @@ namespace Pizza.API.Migrations
 
             modelBuilder.Entity("Entities.Models.Element", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Classes")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DomElement")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FirstChildId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("FirstChildId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HtmlClasses")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("HtmlId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("NextChildId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Styles")
+                    b.Property<string>("HtmlName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("HtmlStyles")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Value")
+                    b.Property<string>("HtmlValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsRoot")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("NextChildId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ParentId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FirstChildId");
-
-                    b.HasIndex("NextChildId");
-
-                    b.HasIndex("ParentId");
 
                     b.ToTable("Elements");
                 });
@@ -230,27 +226,6 @@ namespace Pizza.API.Migrations
                     b.Navigation("Element");
 
                     b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("Entities.Models.Element", b =>
-                {
-                    b.HasOne("Entities.Models.Element", "FirstChild")
-                        .WithMany()
-                        .HasForeignKey("FirstChildId");
-
-                    b.HasOne("Entities.Models.Element", "NextChild")
-                        .WithMany()
-                        .HasForeignKey("NextChildId");
-
-                    b.HasOne("Entities.Models.Element", "ParentElement")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("FirstChild");
-
-                    b.Navigation("NextChild");
-
-                    b.Navigation("ParentElement");
                 });
 
             modelBuilder.Entity("Entities.Models.Session", b =>

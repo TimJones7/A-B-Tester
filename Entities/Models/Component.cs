@@ -22,7 +22,7 @@ namespace Entities.Models
 
         [Required]
         [ForeignKey("Root")]
-        public int ElementId { get; set; }
+        public Guid ElementId { get; set; }
         [Required]
         public Element Root { get; set; }
     }

@@ -27,7 +27,7 @@ namespace Entities.Models
 
         [Required]
         [ForeignKey("Element")]
-        public int ElementId { get; set; }
+        public Guid ElementId { get; set; }
         [Required]
         public Element Element { get; set; }
 
