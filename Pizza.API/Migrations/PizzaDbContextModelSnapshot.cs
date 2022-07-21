@@ -113,9 +113,6 @@ namespace Pizza.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DomElement")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid?>("FirstChildId")
                         .HasColumnType("TEXT");
 
@@ -137,7 +134,10 @@ namespace Pizza.API.Migrations
                     b.Property<bool>("IsRoot")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("NextChildId")
+                    b.Property<Guid?>("NextSiblingId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NodeType")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("ParentId")

@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Pizza.API.Data;
+using Pizza.API.Repository.Commands;
+using Pizza.API.Schema.Mutations;
 using Pizza.API.Schema.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Query>();
-
-
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 builder.Services.AddPooledDbContextFactory<PizzaDbContext>(options =>
 {
@@ -15,6 +17,8 @@ builder.Services.AddPooledDbContextFactory<PizzaDbContext>(options =>
     options.UseSqlite(dbConnection);
 });
 
+
+builder.Services.AddScoped<IElementCommands, ElementCommands>();
 
 var app = builder.Build();
 

@@ -11,11 +11,11 @@ namespace Entities.Models
     public class Element
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public bool IsRoot { get; set; }
 
-        public string? DomElement { get; set; }
+        public string? NodeType { get; set; }
 
         
         public string? HtmlId { get; set; }
@@ -32,7 +32,7 @@ namespace Entities.Models
         
         public Guid? ParentId { get; set; }
         public Guid? FirstChildId { get; set; }        
-        public Guid? NextChildId { get; set; }
+        public Guid? NextSiblingId { get; set; }
 
 
         //  An element might appear in multiple sessions

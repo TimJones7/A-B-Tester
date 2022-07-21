@@ -31,7 +31,7 @@ namespace Pizza.API.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     IsRoot = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DomElement = table.Column<string>(type: "TEXT", nullable: true),
+                    NodeType = table.Column<string>(type: "TEXT", nullable: true),
                     HtmlId = table.Column<string>(type: "TEXT", nullable: true),
                     HtmlClasses = table.Column<string>(type: "TEXT", nullable: true),
                     HtmlStyles = table.Column<string>(type: "TEXT", nullable: true),
@@ -39,7 +39,7 @@ namespace Pizza.API.Migrations
                     HtmlValue = table.Column<string>(type: "TEXT", nullable: true),
                     ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
                     FirstChildId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    NextChildId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    NextSiblingId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
