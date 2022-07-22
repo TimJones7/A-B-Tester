@@ -10,7 +10,6 @@ namespace Pizza.API.Repository.Commands
         private readonly IDbContextFactory<PizzaDbContext> _contextFactory;
         //private readonly PizzaDbContext _dbContext;
 
-
         public ElementCommands(IDbContextFactory<PizzaDbContext> contextFactory)
         {
             _contextFactory = contextFactory;
@@ -18,15 +17,18 @@ namespace Pizza.API.Repository.Commands
 
         public bool UploadElements(List<Element> elements)
         {
-
-            using(PizzaDbContext _context = _contextFactory.CreateDbContext())
+            
+            Parallel.ForEach(elements, currentElement =>
             {
-                foreach (var item in elements)
+                using (PizzaDbContext _context = _contextFactory.CreateDbContext())
                 {
-                    _context.Elements.Add(item);
+                    _context.Elements.Add(currentElement);
+                    _context.SaveChanges();
+                   
                 }
-                return _context.SaveChanges() > 0;
-            }
+            });
+            return true;
+            
         }
     }
 }
